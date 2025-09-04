@@ -75,7 +75,7 @@ class Minesweeper:
                     break
                 if self.has_won():
                     self.print_board(reveal=True)  # ✅ affiche le plateau complet
-                    print("🎉 Congratulations! You've won the game.")
+                    print("Congratulations! You've won the game.")
                     break
             except ValueError:
                 print("Invalid input. Please enter numbers.")
