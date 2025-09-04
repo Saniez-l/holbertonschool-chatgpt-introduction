@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def print_board(board):
     for row in board:
         print(" | ".join(row))
@@ -25,19 +27,27 @@ def tic_tac_toe():
     player = "X"
     while not check_winner(board):
         print_board(board)
-        row = int(input("Enter row (0, 1, or 2) for player " + player + ": "))
-        col = int(input("Enter column (0, 1, or 2) for player " + player + ": "))
-        if board[row][col] == " ":
+        try:
+            row = int(input(f"Enter row (0, 1, or 2) for player {player}: "))
+            col = int(input(f"Enter column (0, 1, or 2) for player {player}: "))
+
+            if row not in [0,1,2] or col not in [0,1,2]:
+                print("Invalid input! Please enter numbers between 0 and 2.")
+                continue
+
+            if board[row][col] != " ":
+                print("That spot is already taken! Try again.")
+                continue
+
             board[row][col] = player
-            winner = player  # ✅ correction : mémoriser le joueur avant de changer
-            if player == "X":
-                player = "O"
-            else:
-                player = "X"
-        else:
-            print("That spot is already taken! Try again.")
+            winner = player
+            player = "O" if player == "X" else "X"
+
+        except ValueError:
+            print("Invalid input! Please enter a number.")
+            continue
 
     print_board(board)
-    print("Player " + winner + " wins!")  # afficher le bon joueur
+    print("Player " + winner + " wins!")
 
 tic_tac_toe()
